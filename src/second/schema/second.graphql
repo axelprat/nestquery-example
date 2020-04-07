@@ -1,0 +1,239 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+input CreateManyUsersInput {
+  """Array of records to create"""
+  users: [CreateUser!]!
+}
+
+input CreateOneUserInput {
+  """The record to create"""
+  user: CreateUser!
+}
+
+input CreateUser {
+  id: ID
+  firstName: String
+  lastName: String
+  created: DateTime
+  updated: DateTime
+}
+
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+input DeleteManyUsersInput {
+  """Filter to find records to delete"""
+  filter: UserFilter!
+}
+
+input DeleteOneInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
+}
+
+type Mutation {
+  deleteOneUser(input: DeleteOneInput!): UserDeleteResponse!
+  deleteManyUsers(input: DeleteManyUsersInput!): DeleteManyResponse!
+  updateOneUser(input: UpdateOneUserInput!): User!
+  updateManyUsers(input: UpdateManyUsersInput!): UpdateManyResponse!
+  createOneUser(input: CreateOneUserInput!): User!
+  createManyUsers(input: CreateManyUsersInput!): [User!]!
+}
+
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type Query {
+  user(id: ID!): User
+  users(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 50}
+
+    """Specify to filter the records returned."""
+    filter: UserFilter = {}
+
+    """Specify to sort results."""
+    sorting: [UserSort!] = []
+  ): UserConnection!
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+input UpdateManyUsersInput {
+  """Filter used to find fields to update"""
+  filter: UserFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateUser!
+}
+
+input UpdateOneUserInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateUser!
+}
+
+input UpdateUser {
+  id: ID
+  firstName: String
+  lastName: String
+  created: DateTime
+  updated: DateTime
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  created: DateTime!
+  updated: DateTime!
+}
+
+type UserConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [UserEdge!]!
+}
+
+type UserDeleteResponse {
+  id: ID
+  firstName: String
+  lastName: String
+  created: DateTime
+  updated: DateTime
+}
+
+type UserEdge {
+  """The node containing the User"""
+  node: User!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+input UserFilter {
+  and: [UserFilter!]
+  or: [UserFilter!]
+  id: IDFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  created: DateFieldComparison
+  updated: DateFieldComparison
+}
+
+input UserSort {
+  field: UserSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum UserSortFields {
+  id
+  firstName
+  lastName
+  created
+  updated
+}

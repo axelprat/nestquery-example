@@ -1,0 +1,8 @@
+entity: PostEntity
+items:
+    post{1..20}:
+        title: '{{name.title}}'
+        content: '{{lorem.words}}'
+        rank: '{{random.number}}'
+        upvote: '{{random.number}}'
+        author: '@author*'

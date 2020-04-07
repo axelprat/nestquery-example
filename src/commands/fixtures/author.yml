@@ -1,0 +1,7 @@
+entity: AuthorEntity
+items:
+    author{1..10}:
+        firstName: '{{name.firstName}}'
+        lastName: '{{name.lastName}}'
+        status: 'created'
+        userId: '($current)'

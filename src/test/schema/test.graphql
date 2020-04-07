@@ -1,0 +1,494 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Author {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  status: Status!
+  created: DateTime!
+  userId: Int!
+  posts(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 10}
+
+    """Specify to filter the records returned."""
+    filter: PostFilter = {}
+
+    """Specify to sort results."""
+    sorting: [PostSort!] = []
+  ): PostConnection!
+  user: User!
+}
+
+type AuthorConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [AuthorEdge!]!
+}
+
+type AuthorDeleteResponse {
+  id: ID
+  firstName: String
+  lastName: String
+  status: Status
+  created: DateTime
+  userId: Int
+}
+
+type AuthorEdge {
+  """The node containing the Author"""
+  node: Author!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+input AuthorFilter {
+  and: [AuthorFilter!]
+  or: [AuthorFilter!]
+  id: IDFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  status: StringFieldComparison
+  created: DateFieldComparison
+  userId: IntFieldComparison
+}
+
+input AuthorSort {
+  field: AuthorSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum AuthorSortFields {
+  id
+  firstName
+  lastName
+  status
+  created
+  userId
+}
+
+"""Cursor for paging through collections"""
+scalar ConnectionCursor
+
+input CreateAuthor {
+  id: ID
+  firstName: String
+  lastName: String
+  status: Status
+  created: DateTime
+  userId: Int
+}
+
+input CreateManyAuthorsInput {
+  """Array of records to create"""
+  authors: [CreateAuthor!]!
+}
+
+input CreateManyPostsInput {
+  """Array of records to create"""
+  posts: [CreatePost!]!
+}
+
+input CreateOneAuthorInput {
+  """The record to create"""
+  author: CreateAuthor!
+}
+
+input CreateOnePostInput {
+  """The record to create"""
+  post: CreatePost!
+}
+
+input CreatePost {
+  id: ID
+  title: String
+  content: String
+  rank: Float
+  upvote: Int
+  authorId: Int
+}
+
+input CursorPaging {
+  """Paginate before opaque cursor"""
+  before: ConnectionCursor
+
+  """Paginate after opaque cursor"""
+  after: ConnectionCursor
+
+  """Paginate first"""
+  first: Int
+
+  """Paginate last"""
+  last: Int
+}
+
+input DateFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: DateTime
+  neq: DateTime
+  gt: DateTime
+  gte: DateTime
+  lt: DateTime
+  lte: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DeleteManyAuthorsInput {
+  """Filter to find records to delete"""
+  filter: AuthorFilter!
+}
+
+input DeleteManyPostsInput {
+  """Filter to find records to delete"""
+  filter: PostFilter!
+}
+
+type DeleteManyResponse {
+  """The number of records deleted."""
+  deletedCount: Int!
+}
+
+input DeleteOneInput {
+  """The id of the record to delete."""
+  id: ID!
+}
+
+input FloatFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Float
+  neq: Float
+  gt: Float
+  gte: Float
+  lt: Float
+  lte: Float
+  in: [Float!]
+  notIn: [Float!]
+}
+
+input IDFilterComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: ID
+  neq: ID
+  gt: ID
+  gte: ID
+  lt: ID
+  lte: ID
+  like: ID
+  notLike: ID
+  iLike: ID
+  notILike: ID
+  in: [ID!]
+  notIn: [ID!]
+}
+
+input IntFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: Int
+  neq: Int
+  gt: Int
+  gte: Int
+  lt: Int
+  lte: Int
+  in: [Int!]
+  notIn: [Int!]
+}
+
+type Mutation {
+  deleteOnePost(input: DeleteOneInput!): PostDeleteResponse!
+  deleteManyPosts(input: DeleteManyPostsInput!): DeleteManyResponse!
+  updateOnePost(input: UpdateOnePostInput!): Post!
+  updateManyPosts(input: UpdateManyPostsInput!): UpdateManyResponse!
+  createOnePost(input: CreateOnePostInput!): Post!
+  createManyPosts(input: CreateManyPostsInput!): [Post!]!
+  removeAuthorFromPost(input: RelationInput!): Post!
+  setAuthorOnPost(input: RelationInput!): Post!
+  deleteOneAuthor(input: DeleteOneInput!): AuthorDeleteResponse!
+  deleteManyAuthors(input: DeleteManyAuthorsInput!): DeleteManyResponse!
+  updateOneAuthor(input: UpdateOneAuthorInput!): Author!
+  updateManyAuthors(input: UpdateManyAuthorsInput!): UpdateManyResponse!
+  createOneAuthor(input: CreateOneAuthorInput!): Author!
+  createManyAuthors(input: CreateManyAuthorsInput!): [Author!]!
+  addPostsToAuthor(input: RelationsInput!): Author!
+}
+
+type PageInfo {
+  """true if paging forward and there are more records."""
+  hasNextPage: Boolean
+
+  """true if paging backwards and there are more records."""
+  hasPreviousPage: Boolean
+
+  """The cursor of the first returned record."""
+  startCursor: ConnectionCursor
+
+  """The cursor of the last returned record."""
+  endCursor: ConnectionCursor
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  rank: Float!
+  upvote: Int!
+  authorId: Int!
+  author: Author!
+}
+
+type PostConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [PostEdge!]!
+}
+
+type PostDeleteResponse {
+  id: ID
+  title: String
+  content: String
+  rank: Float
+  upvote: Int
+  authorId: Int
+}
+
+type PostEdge {
+  """The node containing the Post"""
+  node: Post!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+input PostFilter {
+  and: [PostFilter!]
+  or: [PostFilter!]
+  id: IDFilterComparison
+  title: StringFieldComparison
+  content: StringFieldComparison
+  rank: FloatFieldComparison
+  upvote: IntFieldComparison
+  authorId: IntFieldComparison
+}
+
+input PostSort {
+  field: PostSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum PostSortFields {
+  id
+  title
+  content
+  rank
+  upvote
+  authorId
+}
+
+type Query {
+  post(id: ID!): Post
+  posts(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 50}
+
+    """Specify to filter the records returned."""
+    filter: PostFilter = {}
+
+    """Specify to sort results."""
+    sorting: [PostSort!] = []
+  ): PostConnection!
+  author(id: ID!): Author
+  authors(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 50}
+
+    """Specify to filter the records returned."""
+    filter: AuthorFilter = {}
+
+    """Specify to sort results."""
+    sorting: [AuthorSort!] = []
+  ): AuthorConnection!
+  user(id: ID!): User
+  users(
+    """Limit or page results."""
+    paging: CursorPaging = {first: 50}
+
+    """Specify to filter the records returned."""
+    filter: UserFilter = {}
+
+    """Specify to sort results."""
+    sorting: [UserSort!] = []
+  ): UserConnection!
+}
+
+input RelationInput {
+  """The id of the record."""
+  id: ID!
+
+  """The id of relation."""
+  relationId: ID!
+}
+
+input RelationsInput {
+  """The id of the record."""
+  id: ID!
+
+  """The ids of the relations."""
+  relationIds: [ID!]!
+}
+
+"""Sort Directions"""
+enum SortDirection {
+  ASC
+  DESC
+}
+
+"""Sort Nulls Options"""
+enum SortNulls {
+  NULLS_FIRST
+  NULLS_LAST
+}
+
+enum Status {
+  created
+  pending
+  validated
+  deleted
+}
+
+input StringFieldComparison {
+  is: Boolean
+  isNot: Boolean
+  eq: String
+  neq: String
+  gt: String
+  gte: String
+  lt: String
+  lte: String
+  like: String
+  notLike: String
+  iLike: String
+  notILike: String
+  in: [String!]
+  notIn: [String!]
+}
+
+input UpdateAuthor {
+  id: ID
+  firstName: String
+  lastName: String
+  status: Status
+  created: DateTime
+  userId: Int
+}
+
+input UpdateManyAuthorsInput {
+  """Filter used to find fields to update"""
+  filter: AuthorFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdateAuthor!
+}
+
+input UpdateManyPostsInput {
+  """Filter used to find fields to update"""
+  filter: PostFilter!
+
+  """The update to apply to all records found using the filter"""
+  update: UpdatePost!
+}
+
+type UpdateManyResponse {
+  """The number of records updated."""
+  updatedCount: Int!
+}
+
+input UpdateOneAuthorInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdateAuthor!
+}
+
+input UpdateOnePostInput {
+  """The id of the record to update"""
+  id: ID!
+
+  """The update to apply."""
+  update: UpdatePost!
+}
+
+input UpdatePost {
+  id: ID
+  title: String
+  content: String
+  rank: Float
+  upvote: Int
+  authorId: Int
+}
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  created: DateTime!
+  updated: DateTime!
+}
+
+type UserConnection {
+  """Paging information"""
+  pageInfo: PageInfo!
+
+  """Array of edges."""
+  edges: [UserEdge!]!
+}
+
+type UserEdge {
+  """The node containing the User"""
+  node: User!
+
+  """Cursor for this node."""
+  cursor: ConnectionCursor!
+}
+
+input UserFilter {
+  and: [UserFilter!]
+  or: [UserFilter!]
+  id: IDFilterComparison
+  firstName: StringFieldComparison
+  lastName: StringFieldComparison
+  created: DateFieldComparison
+  updated: DateFieldComparison
+}
+
+input UserSort {
+  field: UserSortFields!
+  direction: SortDirection!
+  nulls: SortNulls
+}
+
+enum UserSortFields {
+  id
+  firstName
+  lastName
+  created
+  updated
+}
